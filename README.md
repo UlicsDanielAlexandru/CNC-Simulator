@@ -1,2 +1,1 @@
-"# ProiectSimulareTaietor" 
-"# ProiectSimulareTaietor" 
+Simulare taietor flama
