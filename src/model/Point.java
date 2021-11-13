@@ -1,6 +1,6 @@
 package model;
 
-public class Point implements Comparable<Point>{
+public class Point{
     private int x;
     private int y;
 
@@ -48,9 +48,14 @@ public class Point implements Comparable<Point>{
                 y == point.y;
     }
 
-    @Override
-    public int compareTo(Point o) {
-        return (this.x + this.y - o.x -o.y);
+    public Point add(Point point)
+    {
+        return new Point(this.x + point.x, this.y + point.y);
+    }
+
+    public Point subtract(Point point)
+    {
+        return new Point(this.x - point.x, this.y - point.y);
     }
 
     @Override

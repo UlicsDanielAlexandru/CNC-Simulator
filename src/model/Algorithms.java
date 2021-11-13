@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 
 public class Algorithms {
 
-    public static List<Point> getSegmentPoints(Point startPoint, Point endpoint) throws InitialCommandException {
-        if(startPoint.equals(endpoint))
+    public static List<Point> getSegmentPoints(Point startPoint, Point endPoint) throws InitialCommandException {
+        if(startPoint.equals(endPoint))
             throw new InitialCommandException("Points are equal!");
         List<Point> points = new ArrayList<>();
         points.add(startPoint);
-        int xDifference = endpoint.getX() - startPoint.getX();
-        int yDifference = endpoint.getY() - startPoint.getY();
+        int xDifference = endPoint.getX() - startPoint.getX();
+        int yDifference = endPoint.getY() - startPoint.getY();
         double m = (double) yDifference / xDifference;
         int steps;
         if(Math.abs(xDifference) > Math.abs(yDifference))
@@ -46,6 +46,8 @@ public class Algorithms {
 
     public static Point getCircleCenter(Point startPoint, Point endPoint, int radius) throws InitialCommandException
     {
+        if(startPoint.equals(endPoint))
+            throw new InitialCommandException("Points are equal!");
         if(radius <= 0)
             throw new InitialCommandException("Incorrect radius!");
         double distance = startPoint.distance(endPoint);
@@ -62,19 +64,23 @@ public class Algorithms {
         return new Point(Math.round(center.getX() + yDifference),Math.round(center.getY() - xDifference));
     }
 
-    public static List<Point> getArcPoints(int xStartPoint, int yStartPoint, int xEndPoint, int yEndPoint, Point center, int radius)
+    public static List<Point> getArcPoints(Point startPoint, Point endPoint, Point center, int radius)
     {
-        if(xEndPoint < xStartPoint)
+        int xLeftInterval = startPoint.getX();
+        int yLeftInterval = startPoint.getY();
+        int xRightInterval = endPoint.getX();
+        int yRightInterval = endPoint.getY();
+        if(xRightInterval < xLeftInterval)
         {
-            int aux = xEndPoint;
-            xEndPoint = xStartPoint;
-            xStartPoint = aux;
+            int aux = xRightInterval;
+            xRightInterval = xLeftInterval;
+            xLeftInterval = aux;
         }
-        if(yEndPoint < yStartPoint)
+        if(yRightInterval < yLeftInterval)
         {
-            int aux = yEndPoint;
-            yEndPoint = yStartPoint;
-            yStartPoint = aux;
+            int aux = yRightInterval;
+            yRightInterval = yLeftInterval;
+            yLeftInterval = aux;
         }
         List<Point> points = new ArrayList<>();
         int xCurrentPoint = 0;
@@ -86,35 +92,35 @@ public class Algorithms {
         {
             xDraw = xCurrentPoint + center.getX();
             yDraw = yCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = xCurrentPoint + center.getX();
             yDraw = -yCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = -xCurrentPoint + center.getX();
             yDraw = yCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = -xCurrentPoint + center.getX();
             yDraw = -yCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = yCurrentPoint + center.getX();
             yDraw = xCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = -yCurrentPoint + center.getX();
             yDraw = xCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = yCurrentPoint + center.getX();
             yDraw = -xCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xDraw = -yCurrentPoint + center.getX();
             yDraw = -xCurrentPoint + center.getY();
-            if(xStartPoint <= xDraw && xDraw <= xEndPoint && yStartPoint <= yDraw && yDraw <= yEndPoint)
+            if(xLeftInterval <= xDraw && xDraw <= xRightInterval && yLeftInterval <= yDraw && yDraw <= yRightInterval)
                 points.add(new Point(xDraw, yDraw));
             xCurrentPoint++;
             if(p < 0)
@@ -133,7 +139,7 @@ public class Algorithms {
         points.remove(downPoint);
         points.remove(leftPoint);
         points.remove(rightPoint);
-        Collections.sort(points);
+        points.sort((x, y) -> (int) Math.round(x.distance(startPoint) - y.distance(startPoint)));
         return points;
     }
 }
