@@ -93,7 +93,7 @@ public class FileInterpreter {
         }
     }
 
-    public static String pointsToCommand(List<Point> points)
+    private static String pointsToCommand(List<Point> points)
     {
         StringBuilder stringBuilder = new StringBuilder();
         Command command = new Command(points.get(1).subtract(points.get(0)));
@@ -101,15 +101,17 @@ public class FileInterpreter {
         {
             Command newCommand = new Command(points.get(index + 1).subtract(points.get(index)));
             if(command.sameType(newCommand))
+            {
                 command.setMovement(command.getMovement().add(newCommand.getMovement()));
+                if(index == (points.size() - 2))
+                    stringBuilder.append(command).append("\n");
+            }
             else
             {
                 stringBuilder.append(command).append("\n");
                 command = newCommand;
             }
         }
-        if(stringBuilder.length() == 0)
-            stringBuilder.append(command).append("\n");
         return String.valueOf(stringBuilder);
     }
 }

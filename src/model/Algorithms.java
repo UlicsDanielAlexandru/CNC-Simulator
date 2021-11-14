@@ -21,6 +21,8 @@ public class Algorithms {
             steps = Math.abs(xDifference);
         else
             steps = Math.abs(yDifference);
+        xDifference /= steps;
+        yDifference /= steps;
         double xCurrentPoint = startPoint.getX();
         double yCurrentPoint = startPoint.getY();
         while(steps != 0)
@@ -28,15 +30,15 @@ public class Algorithms {
             if(m > 1)
             {
                 xCurrentPoint += 1/m;
-                yCurrentPoint++;
+                yCurrentPoint += yDifference;
             }
             else
             {
-                xCurrentPoint++;
+                xCurrentPoint += xDifference;
                 if(m < 1)
                     yCurrentPoint += m;
                 else
-                    yCurrentPoint++;
+                    yCurrentPoint += yDifference;
             }
             points.add(new Point(Math.round(xCurrentPoint),Math.round(yCurrentPoint)));
             steps--;
