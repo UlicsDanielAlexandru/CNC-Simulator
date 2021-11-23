@@ -1,10 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Algorithms {
 
@@ -13,18 +10,27 @@ public class Algorithms {
             throw new InitialCommandException("Points are equal!");
         List<Point> points = new ArrayList<>();
         points.add(startPoint);
+        double xCurrentPoint = startPoint.getX();
+        double yCurrentPoint = startPoint.getY();
         int xDifference = endPoint.getX() - startPoint.getX();
         int yDifference = endPoint.getY() - startPoint.getY();
-        double m = (double) yDifference / xDifference;
         int steps;
         if(Math.abs(xDifference) > Math.abs(yDifference))
             steps = Math.abs(xDifference);
         else
             steps = Math.abs(yDifference);
+        if(xDifference == 0)
+        {
+            for(int index = 0; index < steps; index++)
+            {
+                yCurrentPoint = yCurrentPoint + yDifference / steps;
+                points.add(new Point(Math.round(xCurrentPoint), Math.round(yCurrentPoint)));
+            }
+            return points;
+        }
+        double m = (double) yDifference / xDifference;
         xDifference /= steps;
         yDifference /= steps;
-        double xCurrentPoint = startPoint.getX();
-        double yCurrentPoint = startPoint.getY();
         while(steps != 0)
         {
             if(m > 1)

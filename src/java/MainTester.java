@@ -1,12 +1,14 @@
+import controller.Controller;
 import model.Algorithms;
 import model.FileInterpreter;
 import model.InitialCommandException;
 import model.Point;
+import view.View;
 
 public class MainTester {
     public static void main(String[] args) {
         try {
-            System.out.println(Algorithms.getSegmentPoints(new Point(0,0),new Point(-11,0)));
+            System.out.println(Algorithms.getSegmentPoints(new Point(0,0),new Point(0,10)));
             System.out.println(Algorithms.getCircleCenter(new Point(0,20),new Point(10,30),10));
         } catch (InitialCommandException e) {
             e.printStackTrace();
@@ -17,5 +19,7 @@ public class MainTester {
         } catch (InitialCommandException e) {
             e.printStackTrace();
         }
+        View view = new View();
+        Controller controller = new Controller(view);
     }
 }
