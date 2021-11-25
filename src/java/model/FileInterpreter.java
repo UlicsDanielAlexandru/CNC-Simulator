@@ -13,7 +13,7 @@ public class FileInterpreter {
     public static void interpretFile(String path) throws InitialCommandException
     {
         Pattern verificationPattern = Pattern.compile("\\(?[ ]*(\\d+)[ ]*,[ ]*(\\d+)[ ]*\\)[ ]*,[ ]*\\([ ]*(\\d+)[ ]*,[ ]*(\\d+)[ ]*\\)(?:[ ]*,[ ]*(\\d+))?$");
-        int line = 0;
+        int line = 1;
         String commandFileName = "src\\resources\\commandFile.txt";
         String initialCommand;
         Matcher matcher;
@@ -43,8 +43,8 @@ public class FileInterpreter {
                             int arcRadius;
                             if(matcher.group(5) == null)
                             {
-                                startPoint = new Point(Integer.parseInt(matcher.group(1)),Integer.parseInt(matcher.group(2)));
-                                endPoint = new Point(Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                                startPoint = new Point(Integer.parseInt(matcher.group(1)) * 5, Integer.parseInt(matcher.group(2)) * 5);
+                                endPoint = new Point(Integer.parseInt(matcher.group(3)) * 5, Integer.parseInt(matcher.group(4)) * 5);
                                 try
                                 {
                                     List<Point> points = Algorithms.getSegmentPoints(startPoint, endPoint);
@@ -57,9 +57,9 @@ public class FileInterpreter {
                             }
                             else
                             {
-                                startPoint = new Point(Integer.parseInt(matcher.group(1)),Integer.parseInt(matcher.group(2)));
-                                endPoint = new Point(Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
-                                arcRadius = Integer.parseInt(matcher.group(5));
+                                startPoint = new Point(Integer.parseInt(matcher.group(1)) * 5, Integer.parseInt(matcher.group(2)) * 5);
+                                endPoint = new Point(Integer.parseInt(matcher.group(3)) * 5,Integer.parseInt(matcher.group(4)) * 5);
+                                arcRadius = Integer.parseInt(matcher.group(5)) * 5;
                                 try
                                 {
                                     Point center = Algorithms.getCircleCenter(startPoint, endPoint, arcRadius);

@@ -52,9 +52,19 @@ public class View extends JFrame {
         content.repaint();
     }
 
+    public String getTextPathTextField()
+    {
+        return filePathTextField.getText();
+    }
+
     public int getSelectedLayoutIndex()
     {
         return layoutDimensionComboBox.getSelectedIndex();
+    }
+
+    public void displayError(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(this, errorMessage);
     }
 
     public void addFileOpenButtonListener(ActionListener fileOpenButtonListener)
@@ -66,4 +76,11 @@ public class View extends JFrame {
     {
         layoutDimensionComboBox.addActionListener(layoutDimensionComboBoxListener);
     }
+
+    public void addSimulateButtonActionListener(ActionListener simulateButtonListener)
+    {
+        simulateButton.addActionListener(simulateButtonListener);
+    }
+
+
 }

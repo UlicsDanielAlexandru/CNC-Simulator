@@ -1,8 +1,9 @@
 package controller;
 
+import model.FileInterpreter;
+import model.InitialCommandException;
 import view.View;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +16,7 @@ public class Controller {
         this.view = view;
         view.addFileOpenButtonListener(new FileOpenButtonListener());
         view.addLayoutDimensionComboBoxListener(new LayoutDimensionComboBoxListener());
+        view.addSimulateButtonActionListener(new SimulateButtonListener());
     }
 
     public class FileOpenButtonListener implements ActionListener
@@ -39,6 +41,24 @@ public class Controller {
                 case 1 -> view.replaceGrid(450,450);
                 case 2 -> view.replaceGrid(300,300);
                 default -> throw new IllegalStateException();
+            }
+        }
+    }
+
+    public class SimulateButtonListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if(view.getTextPathTextField().equals(""))
+                view.displayError("No file selected!");
+            else
+            {
+                try {
+                    FileInterpreter.interpretFile(view.getTextPathTextField());
+                } catch (InitialCommandException initialCommandException) {
+                    view.displayError(initialCommandException.getMessage());
+                }
             }
         }
     }

@@ -147,7 +147,7 @@ public class Algorithms {
         points.remove(downPoint);
         points.remove(leftPoint);
         points.remove(rightPoint);
-        points.sort((x, y) -> (int) Math.round(x.distance(startPoint) - y.distance(startPoint)));
+        points.sort((x, y) -> (int) Math.ceil((x.distance(startPoint) - y.distance(startPoint)) * 10));
         return points;
     }
 }

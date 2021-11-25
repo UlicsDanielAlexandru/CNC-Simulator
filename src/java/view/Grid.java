@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 
 public class Grid extends JPanel {
 
-    BufferedImage gridImage;
+    private BufferedImage gridImage;
 
     public Grid(int width, int height)
     {
-        this.setPreferredSize(new Dimension(650, 650));
+        this.setPreferredSize(new Dimension(942, 650));
         gridImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         setupGrid();
     }
@@ -44,7 +44,7 @@ public class Grid extends JPanel {
     @Override
     public void paint(Graphics g)
     {
-        g.drawImage(gridImage,0,0,this);
+        g.drawImage(gridImage,(912 - gridImage.getWidth()) / 2,0,this);
     }
 
 }

@@ -19,6 +19,7 @@ public class MainTester {
         } catch (InitialCommandException e) {
             e.printStackTrace();
         }
+        System.out.println();
         View view = new View();
         Controller controller = new Controller(view);
     }
