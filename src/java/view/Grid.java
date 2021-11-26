@@ -47,4 +47,7 @@ public class Grid extends JPanel {
         g.drawImage(gridImage,(912 - gridImage.getWidth()) / 2,0,this);
     }
 
+    public BufferedImage getGridImage() {
+        return gridImage;
+    }
 }

@@ -16,6 +16,7 @@ public class View extends JFrame {
     private JPanel content = new JPanel(new FlowLayout(FlowLayout.LEFT,40,10));
     private FileDialog fileChooser = new FileDialog(this,"Choose file", FileDialog.LOAD);
     private Grid grid = new Grid(650,650);
+    private CommandInterpreter commandInterpreter = new CommandInterpreter(grid.getGridImage());
 
     public View()
     {
@@ -50,6 +51,11 @@ public class View extends JFrame {
         content.add(grid);
         content.revalidate();
         content.repaint();
+    }
+
+    public void drawCommands()
+    {
+        commandInterpreter.interpretCommands();
     }
 
     public String getTextPathTextField()

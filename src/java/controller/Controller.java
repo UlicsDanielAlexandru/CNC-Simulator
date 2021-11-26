@@ -56,6 +56,9 @@ public class Controller {
             {
                 try {
                     FileInterpreter.interpretFile(view.getTextPathTextField());
+                    view.drawCommands();
+                    view.revalidate();
+                    view.repaint();
                 } catch (InitialCommandException initialCommandException) {
                     view.displayError(initialCommandException.getMessage());
                 }
