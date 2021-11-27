@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class CommandInterpreter {
 
     private Point machineHead;
-    private BufferedImage grid;
+    private Grid grid;
 
-    public CommandInterpreter(BufferedImage grid)
+    public CommandInterpreter(Grid grid)
     {
         this.grid = grid;
-        this.machineHead = new Point(50, grid.getHeight() - 50);
+        this.machineHead = new Point(50, grid.getGridImage().getHeight() - 50);
     }
 
     public void interpretCommands()
@@ -38,9 +38,11 @@ public class CommandInterpreter {
                         while(moveLength > 0)
                         {
                             if(cutting)
-                                grid.setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
+                                grid.getGridImage().setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
                             machineHead.setX(machineHead.getX() + step);
                             moveLength--;
+                            grid.paint(grid.getGraphics());
+                            Thread.sleep(10);
                         }
                     }
                     case "y" -> {
@@ -49,9 +51,11 @@ public class CommandInterpreter {
                         while (moveLength > 0)
                         {
                             if(cutting)
-                                grid.setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
+                                grid.getGridImage().setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
                             machineHead.setY(machineHead.getY() + step);
                             moveLength--;
+                            grid.paint(grid.getGraphics());
+                            Thread.sleep(10);
                         }
                     }
                     case "d" -> {
@@ -62,15 +66,18 @@ public class CommandInterpreter {
                         while (moveLength > 0)
                         {
                             if(cutting)
-                                grid.setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
+                                grid.getGridImage().setRGB(machineHead.getX(), machineHead.getY(), Color.red.getRGB());
                             machineHead = machineHead.add(new Point(xStep, yStep));
                             moveLength--;
+                            grid.paint(grid.getGraphics());
+                            Thread.sleep(10);
                         }
                     }
                     default -> throw new IllegalStateException();
                 }
+
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InterruptedException e) {
             e.printStackTrace();
         }
     }

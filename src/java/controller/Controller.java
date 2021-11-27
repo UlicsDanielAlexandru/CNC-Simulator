@@ -55,10 +55,9 @@ public class Controller {
             else
             {
                 try {
+                    view.replaceGrid();
                     FileInterpreter.interpretFile(view.getTextPathTextField());
                     view.drawCommands();
-                    view.revalidate();
-                    view.repaint();
                 } catch (InitialCommandException initialCommandException) {
                     view.displayError(initialCommandException.getMessage());
                 }

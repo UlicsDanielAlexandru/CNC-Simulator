@@ -16,7 +16,7 @@ public class View extends JFrame {
     private JPanel content = new JPanel(new FlowLayout(FlowLayout.LEFT,40,10));
     private FileDialog fileChooser = new FileDialog(this,"Choose file", FileDialog.LOAD);
     private Grid grid = new Grid(650,650);
-    private CommandInterpreter commandInterpreter = new CommandInterpreter(grid.getGridImage());
+    private CommandInterpreter commandInterpreter = new CommandInterpreter(grid);
 
     public View()
     {
@@ -51,6 +51,19 @@ public class View extends JFrame {
         content.add(grid);
         content.revalidate();
         content.repaint();
+        commandInterpreter = new CommandInterpreter(grid);
+    }
+
+    public void replaceGrid()
+    {
+        int width = grid.getGridImage().getWidth();
+        int height = grid.getGridImage().getHeight();
+        content.remove(grid);
+        grid = new Grid(width, height);
+        content.add(grid);
+        content.revalidate();
+        content.repaint();
+        commandInterpreter = new CommandInterpreter(grid);
     }
 
     public void drawCommands()
