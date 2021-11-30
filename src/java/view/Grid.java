@@ -15,7 +15,7 @@ public class Grid extends JPanel {
         setupGrid();
     }
 
-    private void setupGrid()
+    public void setupGrid()
     {
         Graphics initializer = gridImage.getGraphics();
         initializer.setColor(Color.white);
@@ -25,11 +25,11 @@ public class Grid extends JPanel {
         for(int index = 43; index < gridImage.getWidth() - 50; index += 50)
         {
             initializer.drawString(String.valueOf(gridUnit),index,gridImage.getHeight());
-            initializer.drawString(String.valueOf(gridUnit + 10),0,gridImage.getHeight() - index - 45);
-            gridUnit += 10;
+            initializer.drawString(String.valueOf(gridUnit + 5),0,gridImage.getHeight() - index - 45);
+            gridUnit += 5;
         }
-        initializer.drawString(String.valueOf(gridUnit),gridImage.getWidth() - 19,gridImage.getHeight());
-        for(int column = 0; column < gridImage.getWidth(); column += 50)
+        initializer.drawString(String.valueOf(gridUnit),gridImage.getWidth() - 15,gridImage.getHeight());
+        for(int column = 0; column < gridImage.getWidth(); column += 10)
         {
             for(int row = gridImage.getHeight() - 1; row >= 0; row--)
             {
@@ -41,6 +41,13 @@ public class Grid extends JPanel {
         }
     }
 
+    public void paintRectangle(int x, int y)
+    {
+        Graphics painter = gridImage.getGraphics();
+        painter.setColor(Color.red);
+        painter.fillRect(x + 1, y - 9, 9, 9);
+    }
+
     @Override
     public void paint(Graphics g)
     {
@@ -50,4 +57,5 @@ public class Grid extends JPanel {
     public BufferedImage getGridImage() {
         return gridImage;
     }
+
 }

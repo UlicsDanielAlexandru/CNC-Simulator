@@ -11,7 +11,7 @@ public class View extends JFrame {
     private JTextField filePathTextField = new JTextField();
     private JButton fileOpenButton = new JButton("Open");
     private JLabel layoutDimensionLabel = new JLabel("Select layout dimension:");
-    private String[] layoutDimensions = {"120x120", "80x80", "50x50"};
+    private String[] layoutDimensions = {"60x60", "40x40", "25x25"};
     private JComboBox<String> layoutDimensionComboBox = new JComboBox<>(layoutDimensions);
     private JPanel content = new JPanel(new FlowLayout(FlowLayout.LEFT,40,10));
     private FileDialog fileChooser = new FileDialog(this,"Choose file", FileDialog.LOAD);
@@ -54,19 +54,13 @@ public class View extends JFrame {
         commandInterpreter = new CommandInterpreter(grid);
     }
 
-    public void replaceGrid()
+    public void restartGrid()
     {
-        int width = grid.getGridImage().getWidth();
-        int height = grid.getGridImage().getHeight();
-        content.remove(grid);
-        grid = new Grid(width, height);
-        content.add(grid);
-        content.revalidate();
-        content.repaint();
-        commandInterpreter = new CommandInterpreter(grid);
+        grid.setupGrid();
+        commandInterpreter.resetMachineHead();
     }
 
-    public void drawCommands()
+    public void drawCommands() throws CommandInterpreterException
     {
         commandInterpreter.interpretCommands();
     }

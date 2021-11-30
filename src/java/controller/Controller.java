@@ -2,6 +2,7 @@ package controller;
 
 import model.FileInterpreter;
 import model.InitialCommandException;
+import view.CommandInterpreterException;
 import view.View;
 
 import java.awt.event.ActionEvent;
@@ -55,10 +56,11 @@ public class Controller {
             else
             {
                 try {
-                    view.replaceGrid();
+                    view.restartGrid();
                     FileInterpreter.interpretFile(view.getTextPathTextField());
                     view.drawCommands();
-                } catch (InitialCommandException initialCommandException) {
+                }
+                catch (InitialCommandException | CommandInterpreterException initialCommandException) {
                     view.displayError(initialCommandException.getMessage());
                 }
             }

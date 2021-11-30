@@ -2,6 +2,7 @@ package model;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -43,8 +44,8 @@ public class FileInterpreter {
                             int arcRadius;
                             if(matcher.group(5) == null)
                             {
-                                startPoint = new Point(Integer.parseInt(matcher.group(1)) * 5, Integer.parseInt(matcher.group(2)) * 5);
-                                endPoint = new Point(Integer.parseInt(matcher.group(3)) * 5, Integer.parseInt(matcher.group(4)) * 5);
+                                startPoint = new Point(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
+                                endPoint = new Point(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
                                 try
                                 {
                                     List<Point> points = Algorithms.getSegmentPoints(startPoint, endPoint);
@@ -57,9 +58,9 @@ public class FileInterpreter {
                             }
                             else
                             {
-                                startPoint = new Point(Integer.parseInt(matcher.group(1)) * 5, Integer.parseInt(matcher.group(2)) * 5);
-                                endPoint = new Point(Integer.parseInt(matcher.group(3)) * 5,Integer.parseInt(matcher.group(4)) * 5);
-                                arcRadius = Integer.parseInt(matcher.group(5)) * 5;
+                                startPoint = new Point(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
+                                endPoint = new Point(Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                                arcRadius = Integer.parseInt(matcher.group(5));
                                 try
                                 {
                                     Point center = Algorithms.getCircleCenter(startPoint, endPoint, arcRadius);
@@ -77,7 +78,11 @@ public class FileInterpreter {
                 line++;
             }
 
-        } catch (IOException e) {
+        }
+        catch (FileNotFoundException e) {
+            throw new InitialCommandException("File not found!");
+        }
+        catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
