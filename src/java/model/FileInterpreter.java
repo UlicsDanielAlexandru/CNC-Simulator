@@ -108,14 +108,14 @@ public class FileInterpreter {
             if(command.sameType(newCommand))
             {
                 command.setMovement(command.getMovement().add(newCommand.getMovement()));
-                if(index == (points.size() - 2))
-                    stringBuilder.append(command).append("\n");
             }
             else
             {
                 stringBuilder.append(command).append("\n");
                 command = newCommand;
             }
+            if(index == (points.size() - 2))
+                stringBuilder.append(command).append("\n");
         }
         if(stringBuilder.length()==0)
             stringBuilder.append(command).append("\n");
