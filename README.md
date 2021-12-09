@@ -1,1 +1,1 @@
-Simulare taietor flama
+GNC machine simulator
