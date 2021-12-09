@@ -32,7 +32,7 @@ public class CommandInterpreter {
 
             while(scanner.hasNext())
             {
-                machineHeadChecker();
+                checkMachineHead();
                 switch (scanner.next())
                 {
                     case "cut" -> cutting = true;
@@ -91,7 +91,7 @@ public class CommandInterpreter {
         }
     }
 
-    private void machineHeadChecker() throws CommandInterpreterException
+    private void checkMachineHead() throws CommandInterpreterException
     {
         if(machineHead.getX() < 0 || (machineHead.getX() + 10) > grid.getGridImage().getWidth()
                 || (machineHead.getY() - 10) < 0 || machineHead.getY() > grid.getGridImage().getHeight())
