@@ -62,14 +62,14 @@ public class Algorithms {
         double diameter = 2.0 * radius;
         if(distance > diameter)
             throw new InitialCommandException("Points are too distanced!");
-        Point center = new Point(Math.round((startPoint.getX() + endPoint.getX()) / 2.0),Math.round((startPoint.getY() +
-                endPoint.getY()) / 2.0));
+        double centerX = (startPoint.getX() + endPoint.getX()) / 2.0;
+        double centerY = (startPoint.getY() + endPoint.getY()) / 2.0;
         if(distance == diameter)
-            return center;
+            return new Point(Math.round(centerX),Math.round(centerY));
         double mirrorDistance = Math.sqrt(radius * radius - distance * distance / 4.0);
         double xDifference = (endPoint.getX() - startPoint.getX()) * mirrorDistance / distance;
         double yDifference = (endPoint.getY() - startPoint.getY()) * mirrorDistance / distance;
-        return new Point(Math.round(center.getX() + yDifference),Math.round(center.getY() - xDifference));
+        return new Point(Math.round(centerX + yDifference),Math.round(centerY - xDifference));
     }
 
     public static List<Point> getArcPoints(Point startPoint, Point endPoint, Point center, int radius)

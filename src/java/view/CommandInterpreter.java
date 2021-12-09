@@ -2,8 +2,6 @@ package view;
 
 import model.Point;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -95,8 +93,8 @@ public class CommandInterpreter {
 
     private void machineHeadChecker() throws CommandInterpreterException
     {
-        if(machineHead.getX() < 0 || machineHead.getX() > grid.getGridImage().getWidth() ||
-        machineHead.getY() < 0 || machineHead.getY() > grid.getGridImage().getHeight())
+        if(machineHead.getX() < 0 || (machineHead.getX() + 10) > grid.getGridImage().getWidth()
+                || (machineHead.getY() - 10) < 0 || machineHead.getY() > grid.getGridImage().getHeight())
             throw new CommandInterpreterException("Machine head is out of grid!");
     }
 

@@ -117,6 +117,8 @@ public class FileInterpreter {
                 command = newCommand;
             }
         }
+        if(stringBuilder.length()==0)
+            stringBuilder.append(command).append("\n");
         return String.valueOf(stringBuilder);
     }
 }
