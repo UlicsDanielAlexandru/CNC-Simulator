@@ -33,16 +33,16 @@ public class Algorithms {
         yDifference /= steps;
         while(steps != 0)
         {
-            if(m > 1)
+            if(Math.abs(m) > 1)
             {
-                xCurrentPoint += 1/m;
+                xCurrentPoint += 1/m * Math.signum(yDifference);
                 yCurrentPoint += yDifference;
             }
             else
             {
                 xCurrentPoint += xDifference;
-                if(m < 1)
-                    yCurrentPoint += m;
+                if(Math.abs(m) < 1)
+                    yCurrentPoint += m * Math.signum(xDifference);
                 else
                     yCurrentPoint += yDifference;
             }
