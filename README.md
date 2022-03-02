@@ -1,1 +1,1 @@
-GNC machine simulator
+This is a simulator made in Java to ilustrate the commands of a GNC machinery. The user has the ability to introduce files that have a similar syntax to G-code, used for real world GNC machine, and the application will simulate the cut trajectory of the machinery. The application has a complex verification mechanism using regex, while the visual interface was made using Swing and AWT, certain operations being made at pixel level.
